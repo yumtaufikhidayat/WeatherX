@@ -1,0 +1,22 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.WeatherX" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/purple_700</item>
+    </style>
+
+    <style name="Theme.WeatherX" parent="Base.Theme.WeatherX" />
+
+    <!-- Splash Screen Theme. -->
+    <style name="Theme.AppSplash" parent="Base.Theme.WeatherX">
+        <item name="android:windowSplashScreenBackground">@color/purple_700</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="postSplashScreenTheme">@style/Theme.WeatherX</item>
+
+        <!-- Status bar and Nav bar configs -->
+        <item name="android:statusBarColor">@color/purple_700</item>
+        <item name="android:navigationBarColor">@color/purple_700</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
