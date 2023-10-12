@@ -21,7 +21,7 @@ import kotlin.math.roundToInt
 
 fun ImageView.loadWeatherIcon(
     context: Context,
-    url: String?
+    url: String
 ) {
     Glide.with(context)
         .load(url)
