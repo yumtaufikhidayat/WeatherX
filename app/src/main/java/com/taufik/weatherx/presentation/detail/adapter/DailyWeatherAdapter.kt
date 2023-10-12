@@ -11,8 +11,8 @@ import com.taufik.weatherx.databinding.ItemWeatherDailyBinding
 import com.taufik.weatherx.model.details.daily.DailyItem
 import com.taufik.weatherx.utils.epochToDate
 import com.taufik.weatherx.utils.getDayName
-import com.taufik.weatherx.utils.loadImage
-import kotlin.math.roundToInt
+import com.taufik.weatherx.utils.loadWeatherIcon
+import com.taufik.weatherx.utils.toDegree
 
 
 class DailyWeatherAdapter :
@@ -39,7 +39,7 @@ class DailyWeatherAdapter :
                 val epochDayStr: String = getDayName(epochDateStr)
                 tvDayName.text = epochDayStr
 
-                imgWeatherDaily.loadImage(
+                imgWeatherDaily.loadWeatherIcon(
                     itemView.context,
                     itemView.context.getString(
                         R.string.text_image_icon,
@@ -49,23 +49,8 @@ class DailyWeatherAdapter :
                     )
                 )
 
-                val weatherDegreeMin = data.temp?.min
-                val weatherDegreeMinInt = weatherDegreeMin?.roundToInt()
-                val weatherDegreeMinStr = weatherDegreeMinInt.toString()
-                tvWeatherMin.text = String.format(
-                    "%s %s",
-                    weatherDegreeMinStr,
-                    "\u00B0C"
-                )
-
-                val weatherDegreeMax = data.temp?.max
-                val weatherDegreeMaxInt = weatherDegreeMax?.roundToInt()
-                val weatherDegreeMaxStr = weatherDegreeMaxInt.toString()
-                tvWeatherMax.text = String.format(
-                    "%s %s",
-                    weatherDegreeMaxStr,
-                    "\u00B0C"
-                )
+                tvWeatherMin.text = data.temp?.min?.toDegree()
+                tvWeatherMax.text = data.temp?.max?.toDegree()
             }
         }
     }

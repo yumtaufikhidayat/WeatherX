@@ -9,19 +9,16 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.taufik.weatherx.R
 import com.taufik.weatherx.data.NetworkResult
 import com.taufik.weatherx.databinding.FragmentSearchBinding
-import com.taufik.weatherx.model.search.SearchResponseItem
-import com.taufik.weatherx.presentation.detail.fragment.DetailFragment
 import com.taufik.weatherx.presentation.search.adapter.SearchAdapter
 import com.taufik.weatherx.presentation.search.viewmodel.SearchViewModel
+import com.taufik.weatherx.utils.navigateToDetail
 import com.taufik.weatherx.utils.showError
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +31,11 @@ class SearchFragment : Fragment() {
     private val viewModel by viewModels<SearchViewModel>()
     private val searchAdapter by lazy {
         SearchAdapter {
-            navigateToDetail(it)
+            navigateToDetail(
+                name = it.name,
+                lat = it.lat,
+                lon = it.lon
+            )
         }
     }
 
@@ -133,15 +134,6 @@ class SearchFragment : Fragment() {
 
     private fun showLoading(isShow: Boolean) {
         binding.pbLoading.visibility = if (isShow) View.VISIBLE else View.GONE
-    }
-
-    private fun navigateToDetail(data: SearchResponseItem) {
-        val bundle = bundleOf(
-            DetailFragment.CITY_NAME to data.name,
-            DetailFragment.LAT to data.lat,
-            DetailFragment.LON to data.lon
-        )
-        findNavController().navigate(R.id.detailFragment, bundle)
     }
 
     override fun onDestroyView() {

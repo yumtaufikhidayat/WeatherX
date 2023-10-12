@@ -51,6 +51,22 @@
             tools:visibility="visible"
             app:layout_constraintTop_toTopOf="@id/tvTitle"
             app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+            app:layout_constraintEnd_toStartOf="@id/toggleSaveWeather"/>
+
+        <ToggleButton
+            android:id="@+id/toggleSaveWeather"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="12dp"
+            android:padding="5dp"
+            android:textOn=""
+            android:textOff=""
+            android:background="@drawable/save_toggle"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/tvTitle"
+            app:layout_constraintBottom_toBottomOf="@id/tvTitle"
             app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

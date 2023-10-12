@@ -3,17 +3,23 @@ package com.taufik.weatherx.utils
 import android.content.Context
 import android.util.Log
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.taufik.weatherx.R
+import com.taufik.weatherx.presentation.detail.fragment.DetailFragment
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.Objects
+import kotlin.math.roundToInt
 
 
-fun ImageView.loadImage(
+fun ImageView.loadWeatherIcon(
     context: Context,
     url: String?
 ) {
@@ -60,4 +66,27 @@ fun getDayName(date: String?): String {
 
 fun showError(tag: String, message: String?) {
     Log.e(tag, "error message: $message")
+}
+
+fun Context.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.navigateToDetail(name: String, lat: Double, lon: Double) {
+    val bundle = bundleOf(
+        DetailFragment.CITY_NAME to name,
+        DetailFragment.LAT to lat,
+        DetailFragment.LON to lon
+    )
+    findNavController().navigate(R.id.detailFragment, bundle)
+}
+
+fun Double.toDegree(): String {
+    val weatherDegreeInt = this.roundToInt()
+    val weatherDegreeStr = weatherDegreeInt.toString()
+    return String.format(
+        "%s%s",
+        weatherDegreeStr,
+        "\u00B0C"
+    )
 }

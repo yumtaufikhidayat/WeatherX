@@ -10,7 +10,8 @@ import com.taufik.weatherx.data.remote.service.UrlEndpoint
 import com.taufik.weatherx.databinding.ItemWeatherHourlyBinding
 import com.taufik.weatherx.model.details.onecall.Hourly
 import com.taufik.weatherx.utils.epochToTime
-import com.taufik.weatherx.utils.loadImage
+import com.taufik.weatherx.utils.loadWeatherIcon
+import com.taufik.weatherx.utils.toDegree
 import kotlin.math.roundToInt
 
 class HourlyWeatherAdapter :
@@ -33,7 +34,7 @@ class HourlyWeatherAdapter :
         fun bind(data: Hourly) {
             binding.apply {
                 tvWeatherTimeHourly.text = epochToTime(data.dt)
-                imgWeatherHourly.loadImage(
+                imgWeatherHourly.loadWeatherIcon(
                     itemView.context,
                     itemView.context.getString(
                         R.string.text_image_icon,
@@ -46,11 +47,7 @@ class HourlyWeatherAdapter :
                 val weatherDegree = data.temp
                 val weatherDegreeInt = weatherDegree.roundToInt()
                 val weatherDegreeStr = weatherDegreeInt.toString()
-                tvWeatherDegreeHourly.text = String.format(
-                    "%s %s",
-                    weatherDegreeStr,
-                    "\u00B0C"
-                )
+                tvWeatherDegreeHourly.text = weatherDegree.toDegree()
             }
         }
     }
