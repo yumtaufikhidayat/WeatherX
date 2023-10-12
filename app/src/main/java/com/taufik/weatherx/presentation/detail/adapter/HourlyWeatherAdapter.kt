@@ -12,7 +12,6 @@ import com.taufik.weatherx.model.details.onecall.Hourly
 import com.taufik.weatherx.utils.epochToTime
 import com.taufik.weatherx.utils.loadWeatherIcon
 import com.taufik.weatherx.utils.toDegree
-import kotlin.math.roundToInt
 
 class HourlyWeatherAdapter :
     ListAdapter<Hourly, HourlyWeatherAdapter.HourlyViewHolder>(HOURLY_DIFF_CALLBACK) {
@@ -44,10 +43,7 @@ class HourlyWeatherAdapter :
                     )
                 )
 
-                val weatherDegree = data.temp
-                val weatherDegreeInt = weatherDegree.roundToInt()
-                val weatherDegreeStr = weatherDegreeInt.toString()
-                tvWeatherDegreeHourly.text = weatherDegree.toDegree()
+                tvWeatherDegreeHourly.text = data.temp.toDegree()
             }
         }
     }
