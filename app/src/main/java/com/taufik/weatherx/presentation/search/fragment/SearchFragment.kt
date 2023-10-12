@@ -117,8 +117,7 @@ class SearchFragment : Fragment() {
     private fun showKeyboard() {
         binding.etSearchWeather.apply {
             requestFocus()
-            val imm =
-                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
         }
     }
@@ -126,8 +125,7 @@ class SearchFragment : Fragment() {
     private fun hideKeyboard() {
         binding.etSearchWeather.apply {
             clearFocus()
-            val imm =
-                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(this.windowToken, 0)
         }
     }
