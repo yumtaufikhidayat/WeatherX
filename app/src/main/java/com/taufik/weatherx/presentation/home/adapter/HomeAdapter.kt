@@ -5,8 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.taufik.weatherx.R
-import com.taufik.weatherx.data.remote.service.UrlEndpoint
 import com.taufik.weatherx.databinding.ItemCityWeatherBinding
 import com.taufik.weatherx.model.details.weather.DetailWeathersResponse
 import com.taufik.weatherx.utils.loadWeatherIcon
@@ -37,14 +35,8 @@ class HomeAdapter(
                     tvCityName.text = data.name
                     imgWeatherIcon.loadWeatherIcon(
                         itemView.context,
-                        itemView.context.getString(
-                            R.string.text_image_icon,
-                            UrlEndpoint.WEATHER_BASE_URL,
-                            UrlEndpoint.WEATHER_ICON,
-                            data.weather.first().icon
-                        )
+                        data.weather.first().icon
                     )
-
                     tvWeatherDegree.text = data.main.temp.toDegree()
                     clCityWeather.setOnClickListener {
                         onItemClickListener(data)
