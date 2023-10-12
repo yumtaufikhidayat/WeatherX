@@ -21,6 +21,7 @@ import com.taufik.weatherx.utils.navigateToDetail
 import com.taufik.weatherx.utils.showError
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -64,8 +65,6 @@ class HomeFragment : Fragment() {
     private fun initSavedCityWeather() {
         binding.rvSavedCityWeather.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
-            adapter = homeAdapter
         }
     }
 
@@ -73,6 +72,7 @@ class HomeFragment : Fragment() {
         viewModel.getAllSavedCityWeather().observe(viewLifecycleOwner) { weatherEntity ->
             if (!weatherEntity.isNullOrEmpty()) {
                 homeAdapter.submitList(mapList(weatherEntity))
+                binding.rvSavedCityWeather.adapter = homeAdapter
             } else {
                 showError(TAG, "Error")
             }
