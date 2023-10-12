@@ -65,6 +65,7 @@ class HomeFragment : Fragment() {
     private fun initSavedCityWeather() {
         binding.rvSavedCityWeather.apply {
             layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
         }
     }
 
@@ -86,6 +87,7 @@ class HomeFragment : Fragment() {
                 icon = cities.weatherIcon
             )
             val listWeather = listOf(weather)
+
             val coord = Coord(
                 lat = cities.lat,
                 lon = cities.lon
