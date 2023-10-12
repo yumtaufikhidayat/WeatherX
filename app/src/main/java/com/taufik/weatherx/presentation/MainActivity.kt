@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setNavHost() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
         navController = navHostFragment.findNavController()
     }
 }

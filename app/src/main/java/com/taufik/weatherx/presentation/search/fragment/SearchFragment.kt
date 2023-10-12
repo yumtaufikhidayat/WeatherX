@@ -9,18 +9,20 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.view.isVisible
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.taufik.weatherx.R
 import com.taufik.weatherx.data.NetworkResult
 import com.taufik.weatherx.databinding.FragmentSearchBinding
 import com.taufik.weatherx.model.search.SearchResponseItem
+import com.taufik.weatherx.presentation.detail.fragment.DetailFragment
 import com.taufik.weatherx.presentation.search.adapter.SearchAdapter
 import com.taufik.weatherx.presentation.search.viewmodel.SearchViewModel
+import com.taufik.weatherx.utils.showError
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,9 +32,11 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<SearchViewModel>()
-    private val searchAdapter by lazy { SearchAdapter {
-        insertCity(it)
-    }}
+    private val searchAdapter by lazy {
+        SearchAdapter {
+            navigateToDetail(it)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,18 +96,17 @@ class SearchFragment : Fragment() {
                     is NetworkResult.Loading -> showLoading(true)
                     is NetworkResult.Success -> {
                         showLoading(false)
-//                        showError("")
                         searchAdapter.submitList(it.data)
                     }
 
                     is NetworkResult.Error -> {
                         showLoading(false)
-//                        showError(it.message)
+                        showError(TAG, it.message)
                     }
 
                     else -> {
                         showLoading(false)
-//                        showError(it.message)
+                        showError(TAG, it.message)
                     }
                 }
             }
@@ -113,7 +116,8 @@ class SearchFragment : Fragment() {
     private fun showKeyboard() {
         binding.etSearchWeather.apply {
             requestFocus()
-            val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm =
+                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
         }
     }
@@ -121,7 +125,8 @@ class SearchFragment : Fragment() {
     private fun hideKeyboard() {
         binding.etSearchWeather.apply {
             clearFocus()
-            val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm =
+                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(this.windowToken, 0)
         }
     }
@@ -130,16 +135,21 @@ class SearchFragment : Fragment() {
         binding.pbLoading.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    private fun insertCity(data: SearchResponseItem) {
-        Toast.makeText(
-            requireContext(),
-            "City saved:\nCity: ${data.localNames.id}\nCountry: ${data.country}",
-            Toast.LENGTH_SHORT
-        ).show()
+    private fun navigateToDetail(data: SearchResponseItem) {
+        val bundle = bundleOf(
+            DetailFragment.CITY_NAME to data.name,
+            DetailFragment.LAT to data.lat,
+            DetailFragment.LON to data.lon
+        )
+        findNavController().navigate(R.id.detailFragment, bundle)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val TAG = "search"
     }
 }

@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.taufik.weatherx.data.NetworkResult
 import com.taufik.weatherx.data.repository.WeatherXRepository
 import com.taufik.weatherx.model.search.SearchResponse
-import com.taufik.weatherx.model.search.SearchResponseItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

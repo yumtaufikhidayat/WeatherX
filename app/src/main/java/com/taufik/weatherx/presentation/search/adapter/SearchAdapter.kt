@@ -19,18 +19,21 @@ class SearchAdapter(
         parent: ViewGroup,
         viewType: Int
     ): SearchAdapter.SearchViewHolder =
-        SearchViewHolder(ItemSearchBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        ))
+        SearchViewHolder(
+            ItemSearchBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun onBindViewHolder(
         holder: SearchViewHolder,
         position: Int
     ) = holder.bind(getItem(position))
 
-    inner class SearchViewHolder(private val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class SearchViewHolder(private val binding: ItemSearchBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(data: SearchResponseItem) {
             binding.apply {
                 tvCityName.text = data.name

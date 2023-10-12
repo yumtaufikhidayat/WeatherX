@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">WeatherX</string>
-    <string name="text_degree">30\u00B0C</string>
+    <string name="text_degree">%.2f\u00B0C</string>
     <string name="text_search_city">Search City…</string>
     <string name="text_oops">Oops!. Something Went Wrong…</string>
     <string name="text_state_country">%1$s, %2$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_image_icon">%1$s%2$s%3$s@2x.png</string>
+    <string name="text_hourly">Hourly</string>
+    <string name="text_this_weeks">This Weeks</string>
+    <string name="text_time">04:00</string>
+    <string name="text_min">min</string>
+    <string name="text_max">max</string>
 </resources>
