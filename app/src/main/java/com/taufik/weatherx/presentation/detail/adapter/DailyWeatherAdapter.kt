@@ -15,8 +15,7 @@ import com.taufik.weatherx.utils.loadWeatherIcon
 import com.taufik.weatherx.utils.toDegree
 
 
-class DailyWeatherAdapter :
-    ListAdapter<DailyItem, DailyWeatherAdapter.DailyViewHolder>(DAILY_WEATHER_DIFF_CALLBACK) {
+class DailyWeatherAdapter : ListAdapter<DailyItem, DailyWeatherAdapter.DailyViewHolder>(DAILY_WEATHER_DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyViewHolder =
         DailyViewHolder(
